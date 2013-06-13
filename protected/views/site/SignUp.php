@@ -5,7 +5,7 @@
 
 $this->pageTitle=Yii::app()->name . ' - SignUp';
 $this->breadcrumbs=array(
-	'Login',
+	'SignUp',
 );
 ?>
 
