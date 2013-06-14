@@ -21,13 +21,15 @@ class SignUpForm extends CFormModel
 	{
 		return array(
 			// userName, userMail, userPasswd, userPasswdConfirm are required
-			array('userName, userMail, userPasswd, userPasswdConfirm', 'required'),
-			// userPasswd has to be a valid email address
-			array('userPasswd', 'length', 'min'=>6, 'max'=>16),
+			array('userName, userMail, userPasswd, userPasswdConfirm, captchaCode', 'required'),
+			// userPasswd has to be a length valid 
+			array('userName,userPasswd', 'length', 'min'=>6, 'max'=>16),
+			// userMail has to be a length valid 
+			array('userMail', 'length', 'min'=>6, 'max'=>60),
 			// userMail has to be a valid email address
 			array('userMail', 'email'),
 			// userPasswdConfirm has to be the same as userPasswd
-			array('userPasswdConfirm', 'compare', 'compareAttribute'=>'userPasswd', 'message'=>"Passwords don't match"),
+			array('userPasswdConfirm', 'compare', 'compareAttribute'=>'userPasswd'),
 			// captchaCode needs to be entered correctly
 			array('captchaCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 		);
@@ -43,6 +45,10 @@ class SignUpForm extends CFormModel
 		return array(
 			'captchaCode'=>'Verification Code',
 		);
+	}
+	
+	public function beforeSave() {
+		
 	}
 
 	/**

@@ -1,10 +1,29 @@
-CREATE TABLE tbl_user (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `userId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `userName` varchar(20) DEFAULT NULL,
+  `userMail` varchar(100) DEFAULT NULL,
+  `userPhone` varchar(16) DEFAULT NULL,
+  `userPasswd` varchar(128) DEFAULT NULL,
+  `userSalt` varchar(64) DEFAULT NULL,
+  `activeKey` varchar(128) DEFAULT NULL,
+  `lastVisitDate` datetime DEFAULT NULL,
+  `signupDate` datetime DEFAULT NULL,
+  `state` smallint(5) unsigned DEFAULT NULL,
+  PRIMARY KEY (`userId`),
+  UNIQUE KEY `username` (`userName`),
+  UNIQUE KEY `email` (`userMail`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*CREATE TABLE tbl_user (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(128) NOT NULL,
     password VARCHAR(128) NOT NULL,
     email VARCHAR(128) NOT NULL
 );
+*/
 
+/*
 INSERT INTO tbl_user (username, password, email) VALUES ('test1', 'pass1', 'test1@example.com');
 INSERT INTO tbl_user (username, password, email) VALUES ('test2', 'pass2', 'test2@example.com');
 INSERT INTO tbl_user (username, password, email) VALUES ('test3', 'pass3', 'test3@example.com');
@@ -26,3 +45,5 @@ INSERT INTO tbl_user (username, password, email) VALUES ('test18', 'pass18', 'te
 INSERT INTO tbl_user (username, password, email) VALUES ('test19', 'pass19', 'test19@example.com');
 INSERT INTO tbl_user (username, password, email) VALUES ('test20', 'pass20', 'test20@example.com');
 INSERT INTO tbl_user (username, password, email) VALUES ('test21', 'pass21', 'test21@example.com');
+*/
+

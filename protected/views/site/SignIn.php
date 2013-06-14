@@ -1,21 +1,21 @@
 <?php
 /* @var $this SiteController */
-/* @var $model LoginForm */
+/* @var $model SignInForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Login';
+$this->pageTitle=Yii::app()->name . ' - SignIn';
 $this->breadcrumbs=array(
-	'Login',
+	'SignIn',
 );
 ?>
 
-<h1>Login</h1>
+<h1>SignIn</h1>
 
-<p>Please fill out the following form with your login credentials:</p>
+<p>Please fill out the following form with your SignIn credentials:</p>
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'login-form',
+	'id'=>'SignIn-form',
 	'enableClientValidation'=>true,
 	'clientOptions'=>array(
 		'validateOnSubmit'=>true,
@@ -35,7 +35,7 @@ $this->breadcrumbs=array(
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
 		<p class="hint">
-			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
+			Hint: You may SignIn with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
 		</p>
 	</div>
 
@@ -46,7 +46,7 @@ $this->breadcrumbs=array(
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
+		<?php echo CHtml::submitButton('SignIn'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

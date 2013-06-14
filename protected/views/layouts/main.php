@@ -32,8 +32,8 @@
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'SignUp', 'url'=>array('/site/SignUp')),
+				array('label'=>'SignIn', 'url'=>array('/site/SignIn'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'SignUp', 'url'=>array('/user/SignUp')),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
@@ -49,9 +49,9 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+		Copyright &copy; <?php echo date('Y'); ?> by YondShion.<br/>
 		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
+		<?php //echo Yii::powered(); ?>
 	</div><!-- footer -->
 
 </div><!-- page -->

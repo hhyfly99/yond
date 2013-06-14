@@ -1,11 +1,11 @@
 <?php
 
 /**
- * LoginForm class.
- * LoginForm is the data structure for keeping
- * user login form data. It is used by the 'login' action of 'SiteController'.
+ * SignInForm class.
+ * SignInForm is the data structure for keeping
+ * user SignIn form data. It is used by the 'SignIn' action of 'SiteController'.
  */
-class LoginForm extends CFormModel
+class SignInForm extends CFormModel
 {
 	public $username;
 	public $password;
@@ -56,9 +56,9 @@ class LoginForm extends CFormModel
 
 	/**
 	 * Logs in the user using the given username and password in the model.
-	 * @return boolean whether login is successful
+	 * @return boolean whether SignIn is successful
 	 */
-	public function login()
+	public function SignIn()
 	{
 		if($this->_identity===null)
 		{
@@ -67,8 +67,8 @@ class LoginForm extends CFormModel
 		}
 		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
 		{
-			$duration=$this->rememberMe ? 3600*24*30 : 0; // 30 days
-			Yii::app()->user->login($this->_identity,$duration);
+			$duration=$this->rememberMe ? 3600*24*7 : 0; // 7 days
+			Yii::app()->user->SignIn($this->_identity,$duration);
 			return true;
 		}
 		else
