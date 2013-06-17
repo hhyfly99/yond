@@ -10,10 +10,12 @@ class UserController extends Controller {
 		return array(
 			// captcha action renders the CAPTCHA image displayed on the contact page
 			'captcha'=>array(
-				'class'=>'CCaptchaAction',
-				'minLength' => 4,
-				'maxLength' => 4,
-				'backColor'=>0xFFFFFF,
+				'class'		=>	'CCaptchaAction',
+				'minLength' =>	4,
+				'maxLength' =>	4,
+				'foreColor'	=>	0x3480FF,
+				'backColor'	=>	0xFFFFFF,
+				'width'		=>	100,
 			),
 			// page action renders "static" pages stored under 'protected/views/site/pages'
 			// They can be accessed via: index.php?r=site/page&view=FileName
@@ -22,6 +24,22 @@ class UserController extends Controller {
 			),
 		);
 	}
+	
+	/**
+	 * This is the action to handle external exceptions.
+	 */
+	
+	public function actionError()
+	{
+		if($error=Yii::app()->errorHandler->error)
+		{
+			if(Yii::app()->request->isAjaxRequest)
+				echo $error['message'];
+			else
+				$this->render('error', $error);
+		}
+	}
+	
 	
 	/**
 	 * This is the default 'index' action that is invoked

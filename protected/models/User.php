@@ -59,20 +59,31 @@ class User extends CActiveRecord
 			*/
 		
 			
-			// userName, userMail, userPasswd, userPasswdConfirm are required
+			// userName, userMail, userPasswd, userPasswdConfirm, captchaCode are required
 			array('userName, userMail, userPasswd, userPasswdConfirm, captchaCode', 'required'),
-			// userPasswd has to be a length valid 
-			array('userName,userPasswd', 'length', 'min'=>6, 'max'=>16),
-			// userName has to be a lower string valid 
-			array('userName', 'filter', 'filter'=>'strtolower'),
+			
+			// userName unique 
+			array('userName', 'unique'),
+			// userName has to be a length valid 
+			array('userName', 'length', 'min'=>6, 'max'=>16),
+			// userName regex
+			array('userName', 'match', 'pattern' => '/^[a-zA-Z0-9_]{6,16}$/u'),
+			
+			// userName unique 
+			array('userMail', 'unique'),
 			// userMail has to be a length valid 
 			array('userMail', 'length', 'min'=>5, 'max'=>60),
 			// userMail has to be a valid email address
 			array('userMail', 'email'),
-			// userName and userMail unique 
-			array('userName, userMail', 'unique', 'on' => 'SignUp'),
+			
+			// userPasswd has to be a length valid 
+			array('userPasswd', 'length', 'min'=>6, 'max'=>16),
+			// userPasswd regex
+			array('userPasswd', 'match', 'pattern' => '/^(?=.*\d)(?=.*[a-zA-Z]).{6,16}$/'),
+			
 			// userPasswdConfirm has to be the same as userPasswd
 			array('userPasswdConfirm', 'compare', 'compareAttribute'=>'userPasswd'),
+			
 			// captchaCode needs to be entered correctly
 			array('captchaCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 			
@@ -147,7 +158,7 @@ class User extends CActiveRecord
 	public function beforeSave() 
 	{
 		if ($this->isNewRecord) {
-			$this->userSalt = $this->captchaCode;
+			$this->userSalt = time() . $this->captchaCode;
 			$this->userPasswd = md5($this->userSalt . $this->userPasswd);
 			$this->signupDate = date('Y-m-d H:i:s');
 			
