@@ -16,6 +16,7 @@ $this->breadcrumbs=array(
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'SignUp-form',
+	'enableAjaxValidation'=>true,
 	'enableClientValidation'=>true,
 	'clientOptions'=>array(
 		'validateOnSubmit'=>true,
@@ -60,6 +61,16 @@ $this->breadcrumbs=array(
 		<?php echo $form->error($model,'captchaCode'); ?>
 	</div>
 	<?php endif; ?>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'userAgree'); ?>
+		<?php $form->widget('application.extensions.fancybox.EFancyBox',
+                        array('target'=>'#protocol',
+                        'config'=>array(), ));?>
+		Access <a id="protocol" href="images/User/protocol.jpg">User Protocol</a>
+		<?php echo $form->checkBox($model,'userAgree',array('value'=>1, 'uncheckValue'=>0)); ?>
+		<?php echo $form->error($model,'userAgree'); ?>
+	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('SignUp'); ?>

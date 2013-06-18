@@ -10,6 +10,7 @@
  * @property string $userPhone
  * @property string $userPasswd
  * @property string $userSalt
+ * @property integer $userAgree
  * @property string $activeKey
  * @property string $lastVisitDate
  * @property string $signupDate
@@ -58,19 +59,18 @@ class User extends CActiveRecord
 			array('userId, userName, userMail, userPhone, userPasswd, activeKey, lastVisitDate, signupDate, state', 'safe', 'on'=>'search'),
 			*/
 		
-			
 			// userName, userMail, userPasswd, userPasswdConfirm, captchaCode are required
 			array('userName, userMail, userPasswd, userPasswdConfirm, captchaCode', 'required'),
 			
-			// userName unique 
-			array('userName', 'unique'),
 			// userName has to be a length valid 
 			array('userName', 'length', 'min'=>6, 'max'=>16),
 			// userName regex
 			array('userName', 'match', 'pattern' => '/^[a-zA-Z0-9_]{6,16}$/u'),
-			
 			// userName unique 
-			array('userMail', 'unique'),
+			array('userName', 'unique', 'attributeName'=> 'userName', 'className' => 'User',  'message' => 'User Name exist'),
+			
+			// userMail unique 
+			array('userMail', 'unique', 'attributeName'=> 'userMail', 'className' => 'User',  'message' => 'User Email exist'),
 			// userMail has to be a length valid 
 			array('userMail', 'length', 'min'=>5, 'max'=>60),
 			// userMail has to be a valid email address
@@ -87,6 +87,8 @@ class User extends CActiveRecord
 			// captchaCode needs to be entered correctly
 			array('captchaCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 			
+			// userAgree needs to value = 1 
+			array( 'userAgree', 'required', 'requiredValue'=>1, 'message'=>'You must agree with terms'),
 		);
 	}
 
@@ -145,6 +147,8 @@ class User extends CActiveRecord
 		$criteria->compare('userMail',$this->userMail,true);
 		$criteria->compare('userPhone',$this->userPhone,true);
 		$criteria->compare('userPasswd',$this->userPasswd,true);
+		$criteria->compare('userSalt',$this->userSalt,true);
+		$criteria->compare('userAgree',$this->userAgree,true);
 		$criteria->compare('activeKey',$this->activeKey,true);
 		$criteria->compare('lastVisitDate',$this->lastVisitDate,true);
 		$criteria->compare('signupDate',$this->signupDate,true);
@@ -161,11 +165,22 @@ class User extends CActiveRecord
 			$this->userSalt = time() . $this->captchaCode;
 			$this->userPasswd = md5($this->userSalt . $this->userPasswd);
 			$this->signupDate = date('Y-m-d H:i:s');
-			
 			$this->activeKey = RandomString(32, '');
 		}
 		
 		return parent::beforeSave();
 	}
 	
+	public function getUserSalt() {
+		$userSalts = Yii::app()->db->createCommand()
+			    ->select('userSalt')
+			    ->from('User')
+			    ->where('userName=:userName', array(':userName'=>$this->userName))
+			    ->queryRow();
+		return $userSalt = $userSalts['userSalt'];
+	}
+	
+	public function SignIn() {
+		
+	}
 }
