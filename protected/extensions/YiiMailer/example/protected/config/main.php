@@ -16,18 +16,19 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'ext.YiiMailer.YiiMailer',
 	),
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		
+		/*
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'admin888',
-			// If removed, Gii defaults to localhost only. Edit carefully to taste.
+			'password'=>'Enter Your Password Here',
+		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
-		
+		*/
 	),
 
 	// application components
@@ -35,11 +36,6 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
-		),
-		
-		'YiiMailer'=>array(
-			'class'=>'ext.YiiMailer.YiiMailer',
-			
 		),
 		// uncomment the following to enable URLs in path-format
 		/*
@@ -52,25 +48,23 @@ return array(
 			),
 		),
 		*/
-		/*
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),
-		*/
 		// uncomment the following to use a MySQL database
-		
+		/*
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=yondshion',
+			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => '123456',
+			'password' => '',
 			'charset' => 'utf8',
 		),
-		
+		*/
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
-			'errorAction'=>'site/error',
-		),
+            'errorAction'=>'site/error',
+        ),
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
@@ -92,7 +86,6 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'hhyfly99@163.com',
+		'adminEmail'=>'webmaster@example.com',
 	),
-	
 );

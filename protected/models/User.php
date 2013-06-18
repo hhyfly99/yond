@@ -180,6 +180,15 @@ class User extends CActiveRecord
 		return $userSalt = $userSalts['userSalt'];
 	}
 	
+	public function sendUserActiveMail() {
+		if (!isset($this->userMail)) {
+			return ;
+		}
+		else {
+			$mailTo = $this->userMail;
+		}
+	}
+	
 	public function SignIn() {
 		
 	}
