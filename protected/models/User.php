@@ -181,15 +181,80 @@ class User extends CActiveRecord
 	}
 	
 	public function sendUserActiveMail() {
-		if (!isset($this->userMail)) {
-			return ;
-		}
-		else {
-			$mailTo = $this->userMail;
-		}
-	}
-	
-	public function SignIn() {
+		/*
+		$mail = new YiiMailer();
+		$mail->setView('SignUp');
+		$mail->setData(array(
+				'message'=>'Message to send',
+				'name'=>'YondShion.Co. Ltd',
+				'description'=>'contact form',
+				'mailer' => $mail
+			)
+		);
 		
+		$mail->render();
+		//$mail->From = 'hhyfly99@163.com';
+		//$mail->FromName = 'Info@YondShion.com';
+		$mail->Subject = 'Thanks for your registration';
+		$mail->From = 'hhyfly99@163.com';
+		$mail->FromName = 'tuomu';
+		$mail->AddAddress('871818355@qq.com');
+		
+		var_dump($mail);
+		if ($mail->Send()) {
+			$mail->ClearAddresses();
+			echo 'Mail sent successfuly';
+		} else {
+			echo 'Error while sending email: '.$mail->ErrorInfo;
+		}
+		*/
+		
+		
+		/*
+		//Do some cron processing...
+		$cronResult="Cron job finished successfuly";
+		
+		$mail = new YiiMailer();
+		$mail->Encoding = 'base64';
+		$mail->CharSet='UTF-8';
+		$mail->Port=25;
+		//use "cron" view from views/mail
+		$mail->setView('SignUp');
+		$mail->setData(array('message' => $cronResult, 'name' => get_class($this), 'description' => 'Cron job', 'mailer' => $mail));
+		//render HTML mail, layout is set from config file or with $mail->setLayout('layoutName')
+		$mail->render();
+		//set properties as usually with PHPMailer
+		$mail->From = 'hhyfly99@163.com';
+		//$mail->FromName = 'tuomu';
+		$mail->Subject = $cronResult;
+		$mail->AddAddress('871818355@qq.com');
+		//send
+		var_dump($mail);
+		if ($mail->Send()) {
+			$mail->ClearAddresses();
+			echo 'Mail sent successfuly';
+		} else {
+			echo 'Error while sending email: '.$mail->ErrorInfo;
+		}
+		echo PHP_EOL;
+		*/
+		
+		$message = new YiiMailMessage();
+        //this points to the file test.php inside the view path
+        $message->view = "SignUpMailTemplate";
+        //echo $this->activeKey;
+        $params = array(
+        	'MailFrom'=>'YondShion.com',
+        	'userName'=>$this->userName,
+        	'userMail'=>$this->userMail,
+        	'userPasswd'=>$this->userPasswd,
+        	'activeKey'=>$this->activeKey
+        );
+        $message->subject = 'Thank you for your registration';
+        $message->setBody($params, 'text/html');
+        $message->addTo($this->userMail);
+        $message->from = 'hhyfly99@163.com';
+        Yii::app()->mail->send($message);
+        
 	}
 }

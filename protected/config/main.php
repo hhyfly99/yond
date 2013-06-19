@@ -16,6 +16,8 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		//'ext.YiiMailer.YiiMailer',
+		'ext.yii-mail.YiiMailMessage'
 	),
 
 	'modules'=>array(
@@ -36,11 +38,29 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
-		
-		'YiiMailer'=>array(
+		'mail' => array(
+                'class' => 'ext.yii-mail.YiiMail',
+                'transportType'=>'smtp',
+                'transportOptions'=>array(
+                        'host'=>'smtp.163.com',
+                        'username'=>'hhyfly99@163.com',
+                        'password'=>'lang29tian8317',
+                        'port'=>'25',     
+                ),
+                'viewPath' => 'application.views.mail',
+        ),
+		/*
+		'email'=>array(
 			'class'=>'ext.YiiMailer.YiiMailer',
-			
+			'Host'=>'smtp.163.com',
+			'Port'=>25,
+			'CharSet'=>'utf-8',
+			'Encoding'=>'base64',
+			'SMTPAuth'=>true,
+			'Username'=>'hhyfly99@163.com',
+			'Password'=>'lang29tian8317',
 		),
+		*/
 		// uncomment the following to enable URLs in path-format
 		/*
 		'urlManager'=>array(

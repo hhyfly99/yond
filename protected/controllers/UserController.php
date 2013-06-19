@@ -69,7 +69,9 @@ class UserController extends Controller {
 			$model->attributes=$_POST['User'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate()) {
+				//$model->sendUserActiveMail();
 				$model->save();
+				$model->sendUserActiveMail();
 				$this->redirect(Yii::app()->user->returnUrl);
 			}
 		}

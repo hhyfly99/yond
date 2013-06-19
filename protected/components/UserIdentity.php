@@ -33,17 +33,6 @@ class UserIdentity extends CUserIdentity
 		*/
 		$user = User::model()->findByAttributes(array('userName' => $this->userName));
 		
-		
-		$userSalts = Yii::app()->db->createCommand()
-			    ->select('userSalt')
-			    ->from('User')
-			    ->where('userName=:userName', array(':userName'=>$this->userName))
-			    ->queryRow();
-		$userSalt = $userSalts['userSalt'];
-		
-		//echo $this->getUserPasswd();
-		//$user->getUserSalt();
-		
 		if (null === $user)
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
 		elseif ($this->getUserPasswd() !== md5($user->getUserSalt() . $this->userPasswd))
