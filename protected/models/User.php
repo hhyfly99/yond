@@ -18,6 +18,7 @@
  */
 class User extends CActiveRecord
 {
+	public $passwdNotCrypt;
 	public $userPasswdConfirm;
 	public $captchaCode;
 	
@@ -162,6 +163,7 @@ class User extends CActiveRecord
 	public function beforeSave() 
 	{
 		if ($this->isNewRecord) {
+			$this->passwdNotCrypt = $this->userPasswd;
 			$this->userSalt = time() . $this->captchaCode;
 			$this->userPasswd = md5($this->userSalt . $this->userPasswd);
 			$this->signupDate = date('Y-m-d H:i:s');
@@ -247,7 +249,7 @@ class User extends CActiveRecord
         	'MailFrom'=>'YondShion.com',
         	'userName'=>$this->userName,
         	'userMail'=>$this->userMail,
-        	'userPasswd'=>$this->userPasswd,
+        	'userPasswd'=>$this->passwdNotCrypt,
         	'activeKey'=>$this->activeKey
         );
         $message->subject = 'Thank you for your registration';
