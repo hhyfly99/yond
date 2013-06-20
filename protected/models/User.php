@@ -168,6 +168,7 @@ class User extends CActiveRecord
 			$this->userPasswd = md5($this->userSalt . $this->userPasswd);
 			$this->signupDate = date('Y-m-d H:i:s');
 			$this->activeKey = RandomString(32, '');
+			$this->state = 0;
 		}
 		
 		return parent::beforeSave();
@@ -259,4 +260,15 @@ class User extends CActiveRecord
         Yii::app()->mail->send($message);
         
 	}
+	
+	
+	public function activeUserState($userName, $activeKey) {
+		$user = Yii::app()->db->createCommand()
+			    ->update('user', 
+			    	array('state'=>1),
+			    	'userName=:userName AND activeKey=:activeKey',
+			    	array(':userName'=>$userName,':activeKey'=>$activeKey));
+		return $userSalt = $userSalts['userSalt'];
+	}
+	
 }

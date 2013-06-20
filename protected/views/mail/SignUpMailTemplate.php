@@ -10,7 +10,7 @@
 		User E-mail: <?php echo $userMail;?><br>
 		User Password: <?php echo $userPasswd;?><br>
         <br>
-        Please click the <a href="<?php echo Yii::app()->createAbsoluteUrl(Yii::app()->request->baseUrl); ?>?r=user/ActiveUser&userName=<?php echo $userName;?>&activeKey=<?php echo $activeKey; ?>">
+        Please click the <a href="<?php echo Yii::app()->createAbsoluteUrl(Yii::app()->request->baseUrl); ?>/user/ActiveUser/userName/<?php echo $userName;?>/activeKey/<?php echo $activeKey; ?>">
         Active</a> link to finish the registration
 	</body>
 </html>

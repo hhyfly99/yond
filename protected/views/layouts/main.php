@@ -27,20 +27,21 @@
 
 <div class="container" id="page">
 
-
 	<div id="header">
 		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<div><a href="<?php echo Yii::app()->createAbsoluteUrl(Yii::app()->request->baseUrl);?>/site/translate"><?php echo Yii::t('widgets','English');?></a></div>
+		<div><a href="<?php echo Yii::app()->createAbsoluteUrl(Yii::app()->request->baseUrl);?>/site/translate"><?php echo Yii::t('widgets','Chinese');?></a></div>
 	</div><!-- header -->
 
 
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
+				array('label'=>Yii::t('widgets','Home'), 'url'=>array('/site/index')),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'SignIn', 'url'=>array('/site/SignIn'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'SignUp', 'url'=>array('/user/SignUp')),
+				array('label'=>Yii::t('widgets','SignIn'), 'url'=>array('/site/SignIn'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>Yii::t('widgets','SignUp'), 'url'=>array('/user/SignUp')),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>

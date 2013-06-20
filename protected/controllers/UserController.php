@@ -81,6 +81,10 @@ class UserController extends Controller {
 	}
 	
 	public function actionActiveUser() {
-		
+		$userName = Yii::app()->request->getQuery('userName');
+		$activeKey = Yii::app()->request->getQuery('activeKey');
+		$model = new User();
+		$model->activeUserState($userName, $activeKey);
+		$this->redirect(array('/site/page', 'view'=>'SignUpSuccess'));
 	}
 }
