@@ -19,7 +19,9 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		//'ext.YiiMailer.YiiMailer',
-		'ext.yii-mail.YiiMailMessage'
+		//'ext.LangUrlManager.LangUrlManager',
+		'ext.yii-mail.YiiMailMessage',
+		
 	),
 
 	'modules'=>array(
@@ -74,7 +76,13 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		
+		/*
+		'LangUrlManager'=>array(
+			'class'=>'application.extensions.LangUrlManager.LangUrlManager',
+            'languages'=>array('zh_cn','en_us'),
+            'langParam'=>'language',
+		),
+		*/
 		/*
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',

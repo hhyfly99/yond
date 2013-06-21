@@ -111,16 +111,4 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 	
-	//translate language
-	public function actionTranslate() {
-		$lang = Yii::app()->language;
-		if ($lang == 'zh_cn') {
-			Yii::app()->language = 'en_us';
-		}
-		else {
-			Yii::app()->language = 'zh_cn';
-		}
-		
-		$this->redirect(Yii::app()->homeUrl);
-	}
 }

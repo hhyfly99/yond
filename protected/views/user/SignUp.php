@@ -3,13 +3,13 @@
 /* @var $model SignUpForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - SignUp';
+$this->pageTitle=Yii::app()->name . ' - ' . Yii::t('mainTemplate','SignUp');
 $this->breadcrumbs=array(
-	'SignUp',
+	Yii::t('mainTemplate','SignUp'),
 );
 ?>
 
-<h1>SignUp</h1>
+<h1><?php echo Yii::t('mainTemplate','SignUp')?></h1>
 
 <p>Please fill out the following form with your SignUp credentials:</p>
 
@@ -67,7 +67,7 @@ $this->breadcrumbs=array(
 		<?php $form->widget('application.extensions.fancybox.EFancyBox',
                         array('target'=>'#protocol',
                         'config'=>array(), ));?>
-		Access <a id="protocol" href="images/User/protocol.jpg">User Protocol</a>
+		Access <a id="protocol" href="<?php echo Yii::app()->request->baseUrl;?>/images/User/protocol.html">User Protocol</a>
 		<?php echo $form->checkBox($model,'userAgree',array('value'=>1, 'uncheckValue'=>0)); ?>
 		<?php echo $form->error($model,'userAgree'); ?>
 	</div>

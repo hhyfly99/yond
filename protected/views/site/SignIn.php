@@ -3,13 +3,13 @@
 /* @var $model SignInForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - SignIn';
+$this->pageTitle=Yii::app()->name . ' - ' . Yii::t('mainTemplate','SignIn');
 $this->breadcrumbs=array(
-	'SignIn',
+	Yii::t('mainTemplate','SignIn'),
 );
 ?>
 
-<h1>SignIn</h1>
+<h1><?php echo Yii::t('mainTemplate','SignIn');?></h1>
 
 <p>Please fill out the following form with your SignIn credentials:</p>
 

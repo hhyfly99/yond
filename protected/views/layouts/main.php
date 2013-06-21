@@ -13,7 +13,6 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
 
-
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 
@@ -29,19 +28,31 @@
 
 	<div id="header">
 		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-		<div><a href="<?php echo Yii::app()->createAbsoluteUrl(Yii::app()->request->baseUrl);?>/site/translate"><?php echo Yii::t('widgets','English');?></a></div>
-		<div><a href="<?php echo Yii::app()->createAbsoluteUrl(Yii::app()->request->baseUrl);?>/site/translate"><?php echo Yii::t('widgets','Chinese');?></a></div>
+
+		<?php $widget=$this->beginWidget('application.widgets.LangBox'); ?>	
+		<?php $this->endWidget(); ?>
+		
+		
+		
+		<!-- 
+		<?php //echo CHtml::link('<span class="zh_cn">中文</span>',array(Yii::app()->defaultController.'/',Yii::app()->LangUrlManager->langParam=>'zh_cn'),array(
+                    //'class'=>((Yii::app()->language=='zh_cn') ? 'action':''),
+                //));?>
+                <?php //echo CHtml::link('<span class="ua">English</span>',array(Yii::app()->defaultController.'/',Yii::app()->LangUrlManager->langParam=>'en_us'),array(
+                    //'class'=>((Yii::app()->language=='en_us') ? 'action':''),
+                //));?>
+		 -->
 	</div><!-- header -->
 
 
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>Yii::t('widgets','Home'), 'url'=>array('/site/index')),
+				array('label'=>Yii::t('mainTemplate','Home'), 'url'=>array('/site/index')),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>Yii::t('widgets','SignIn'), 'url'=>array('/site/SignIn'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>Yii::t('widgets','SignUp'), 'url'=>array('/user/SignUp')),
+				array('label'=>Yii::t('mainTemplate','SignIn'), 'url'=>array('/site/SignIn'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>Yii::t('mainTemplate','SignUp'), 'url'=>array('/user/SignUp')),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
