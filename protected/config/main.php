@@ -42,6 +42,7 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+		//yii-mail component
 		'mail' => array(
                 'class' => 'ext.yii-mail.YiiMail',
                 'transportType'=>'smtp',
@@ -52,6 +53,14 @@ return array(
                         'port'=>'25',     
                 ),
                 'viewPath' => 'application.views.mail',
+        ),
+        //yii RBAC component
+        'authManager'=>array(
+        	'class'=>'CDbAuthManager',
+        	'defaultRoles'=>array('guest'),
+        	'itemTable'=>'authItem',
+        	'itemChildTable'=>'authItemChild',
+        	'assignmentTable'=>'authAssignment',
         ),
 		/*
 		'email'=>array(
@@ -74,6 +83,13 @@ return array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+        		
+        		//admin controller
+        		/*
+        		'<AdminIdentity:\w+>/<id:\d+>'=>'<AdminIdentity>/view',
+				'<AdminIdentity:\w+>/<action:\w+>/<id:\d+>'=>'<AdminIdentity>/<action>',
+				'<AdminIdentity:\w+>/<action:\w+>'=>'<AdminIdentity>/<action>',
+				*/
 			),
 		),
 		/*
