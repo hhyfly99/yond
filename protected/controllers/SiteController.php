@@ -27,7 +27,7 @@ class SiteController extends Controller
 
 	/**
 	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
+	 * when an action is not explicitly requested by members.
 	 */
 	public function actionIndex()
 	{
@@ -90,24 +90,24 @@ class SiteController extends Controller
 			Yii::app()->end();
 		}
 
-		// collect user input data
+		// collect member input data
 		if(isset($_POST['SignInForm']))
 		{
 			$model->attributes=$_POST['SignInForm'];
-			// validate user input and redirect to the previous page if valid
+			// validate member input and redirect to the previous page if valid
 			if($model->validate() && $model->SignIn())
-				$this->redirect(Yii::app()->user->returnUrl);
+				$this->redirect(Yii::app()->member->returnUrl);
 		}
 		// display the SignIn form
 		$this->render('SignIn',array('model'=>$model));
 	}
 
 	/**
-	 * Logs out the current user and redirect to homepage.
+	 * Logs out the current member and redirect to homepage.
 	 */
 	public function actionLogout()
 	{
-		Yii::app()->user->logout();
+		Yii::app()->member->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
 	

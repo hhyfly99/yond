@@ -26,27 +26,27 @@ $this->breadcrumbs=array(
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'userName'); ?>
-		<?php echo $form->textField($model,'userName'); ?>
-		<?php echo $form->error($model,'userName'); ?>
+		<?php echo $form->labelEx($model,'memberName'); ?>
+		<?php echo $form->textField($model,'memberName'); ?>
+		<?php echo $form->error($model,'memberName'); ?>
 	</div>
 	
 	<div class="row">
-		<?php echo $form->labelEx($model,'userMail'); ?>
-		<?php echo $form->textField($model,'userMail'); ?>
-		<?php echo $form->error($model,'userMail'); ?>
+		<?php echo $form->labelEx($model,'memberMail'); ?>
+		<?php echo $form->textField($model,'memberMail'); ?>
+		<?php echo $form->error($model,'memberMail'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'userPasswd'); ?>
-		<?php echo $form->passwordField($model,'userPasswd'); ?>
-		<?php echo $form->error($model,'userPasswd'); ?>
+		<?php echo $form->labelEx($model,'memberPasswd'); ?>
+		<?php echo $form->passwordField($model,'memberPasswd'); ?>
+		<?php echo $form->error($model,'memberPasswd'); ?>
 	</div>
 	
 	<div class="row">
-		<?php echo $form->labelEx($model,'userPasswdConfirm'); ?>
-		<?php echo $form->passwordField($model,'userPasswdConfirm'); ?>
-		<?php echo $form->error($model,'userPasswdConfirm'); ?>
+		<?php echo $form->labelEx($model,'memberPasswdConfirm'); ?>
+		<?php echo $form->passwordField($model,'memberPasswdConfirm'); ?>
+		<?php echo $form->error($model,'memberPasswdConfirm'); ?>
 	</div>
 	
 	<?php if(CCaptcha::checkRequirements()): ?>
@@ -63,13 +63,13 @@ $this->breadcrumbs=array(
 	<?php endif; ?>
 	
 	<div class="row">
-		<?php echo $form->labelEx($model,'userAgree'); ?>
+		<?php echo $form->labelEx($model,'memberAgree'); ?>
 		<?php $form->widget('application.extensions.fancybox.EFancyBox',
                         array('target'=>'#protocol',
                         'config'=>array(), ));?>
-		Access <a id="protocol" href="<?php echo Yii::app()->request->baseUrl;?>/images/User/protocol.html">User Protocol</a>
-		<?php echo $form->checkBox($model,'userAgree',array('value'=>1, 'uncheckValue'=>0)); ?>
-		<?php echo $form->error($model,'userAgree'); ?>
+		Access <a id="protocol" href="<?php echo Yii::app()->request->baseUrl;?>/images/Member/protocol.html">Member Protocol</a>
+		<?php echo $form->checkBox($model,'memberAgree',array('value'=>1, 'uncheckValue'=>0)); ?>
+		<?php echo $form->error($model,'memberAgree'); ?>
 	</div>
 
 	<div class="row buttons">

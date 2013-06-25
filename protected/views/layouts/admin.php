@@ -34,9 +34,9 @@
 				<?php $this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
 						array('label'=>Yii::t('adminTemplate','Home'), 'url'=>array('/site/index')),
-						array('label'=>Yii::t('adminTemplate','SignIn'), 'url'=>array('/site/SignIn'), 'visible'=>Yii::app()->user->isGuest),
-						array('label'=>Yii::t('adminTemplate','SignUp'), 'url'=>array('/user/SignUp')),
-						array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+						array('label'=>Yii::t('adminTemplate','SignIn'), 'url'=>array('/site/SignIn'), 'visible'=>Yii::app()->member->isGuest),
+						array('label'=>Yii::t('adminTemplate','SignUp'), 'url'=>array('/member/SignUp')),
+						array('label'=>'Logout ('.Yii::app()->member->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->member->isGuest)
 					),
 				)); ?>
 			</div><!-- mainmenu -->

@@ -9,7 +9,7 @@
  * @property string $bizrule
  * @property string $data
  */
-class User extends CActiveRecord
+class Admin extends CActiveRecord
 {
 	
 	

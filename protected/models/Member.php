@@ -1,31 +1,31 @@
 <?php
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table "member".
  *
- * The followings are the available columns in table 'user':
- * @property string $userId
- * @property string $userName
- * @property string $userMail
- * @property string $userPhone
- * @property string $userPasswd
- * @property string $userSalt
- * @property integer $userAgree
+ * The followings are the available columns in table 'member':
+ * @property string $memberId
+ * @property string $memberName
+ * @property string $memberMail
+ * @property string $memberPhone
+ * @property string $memberPasswd
+ * @property string $memberSalt
+ * @property integer $memberAgree
  * @property string $activeKey
  * @property string $lastVisitDate
  * @property string $signupDate
  * @property integer $state
  */
-class User extends CActiveRecord
+class Member extends CActiveRecord
 {
 	public $passwdNotCrypt;
-	public $userPasswdConfirm;
+	public $memberPasswdConfirm;
 	public $captchaCode;
 	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return User the static model class
+	 * @return Member the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -37,7 +37,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'user';
+		return 'member';
 	}
 
 	/**
@@ -46,50 +46,50 @@ class User extends CActiveRecord
 	public function rules()
 	{
 		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
+		// will receive member inputs.
 		return array(
 			/*
 			array('state', 'numerical', 'integerOnly'=>true),
-			array('userName', 'length', 'max'=>20),
-			array('userMail', 'length', 'max'=>100),
-			array('userPhone', 'length', 'max'=>16),
-			array('userPasswd, activeKey', 'length', 'max'=>128),
+			array('memberName', 'length', 'max'=>20),
+			array('memberMail', 'length', 'max'=>100),
+			array('memberPhone', 'length', 'max'=>16),
+			array('memberPasswd, activeKey', 'length', 'max'=>128),
 			array('lastVisitDate, signupDate', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('userId, userName, userMail, userPhone, userPasswd, activeKey, lastVisitDate, signupDate, state', 'safe', 'on'=>'search'),
+			array('memberId, memberName, memberMail, memberPhone, memberPasswd, activeKey, lastVisitDate, signupDate, state', 'safe', 'on'=>'search'),
 			*/
 		
-			// userName, userMail, userPasswd, userPasswdConfirm, captchaCode are required
-			array('userName, userMail, userPasswd, userPasswdConfirm, captchaCode', 'required'),
+			// memberName, memberMail, memberPasswd, memberPasswdConfirm, captchaCode are required
+			array('memberName, memberMail, memberPasswd, memberPasswdConfirm, captchaCode', 'required'),
 			
-			// userName has to be a length valid 
-			array('userName', 'length', 'min'=>6, 'max'=>16),
-			// userName regex
-			array('userName', 'match', 'pattern' => '/^[a-zA-Z0-9_]{6,16}$/u'),
-			// userName unique 
-			array('userName', 'unique', 'attributeName'=> 'userName', 'className' => 'User',  'message' => 'User Name exist'),
+			// memberName has to be a length valid 
+			array('memberName', 'length', 'min'=>6, 'max'=>16),
+			// memberName regex
+			array('memberName', 'match', 'pattern' => '/^[a-zA-Z0-9_]{6,16}$/u'),
+			// memberName unique 
+			array('memberName', 'unique', 'attributeName'=> 'memberName', 'className' => 'Member',  'message' => 'Member Name exist'),
 			
-			// userMail unique 
-			array('userMail', 'unique', 'attributeName'=> 'userMail', 'className' => 'User',  'message' => 'User Email exist'),
-			// userMail has to be a length valid 
-			array('userMail', 'length', 'min'=>5, 'max'=>60),
-			// userMail has to be a valid email address
-			array('userMail', 'email'),
+			// memberMail unique 
+			array('memberMail', 'unique', 'attributeName'=> 'memberMail', 'className' => 'Member',  'message' => 'Member Email exist'),
+			// memberMail has to be a length valid 
+			array('memberMail', 'length', 'min'=>5, 'max'=>60),
+			// memberMail has to be a valid email address
+			array('memberMail', 'email'),
 			
-			// userPasswd has to be a length valid 
-			array('userPasswd', 'length', 'min'=>6, 'max'=>16),
-			// userPasswd regex
-			array('userPasswd', 'match', 'pattern' => '/^(?=.*\d)(?=.*[a-zA-Z]).{6,16}$/'),
+			// memberPasswd has to be a length valid 
+			array('memberPasswd', 'length', 'min'=>6, 'max'=>16),
+			// memberPasswd regex
+			array('memberPasswd', 'match', 'pattern' => '/^(?=.*\d)(?=.*[a-zA-Z]).{6,16}$/'),
 			
-			// userPasswdConfirm has to be the same as userPasswd
-			array('userPasswdConfirm', 'compare', 'compareAttribute'=>'userPasswd'),
+			// memberPasswdConfirm has to be the same as memberPasswd
+			array('memberPasswdConfirm', 'compare', 'compareAttribute'=>'memberPasswd'),
 			
 			// captchaCode needs to be entered correctly
 			array('captchaCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 			
-			// userAgree needs to value = 1 
-			array( 'userAgree', 'required', 'requiredValue'=>1, 'message'=>'You must agree with terms'),
+			// memberAgree needs to value = 1 
+			array( 'memberAgree', 'required', 'requiredValue'=>1, 'message'=>'You must agree with terms'),
 		);
 	}
 
@@ -111,22 +111,22 @@ class User extends CActiveRecord
 	{
 		return array(
 			/*
-			'userId' => 'User',
-			'userName' => 'User Name',
-			'userMail' => 'User Mail',
-			'userPhone' => 'User Phone',
-			'userPasswd' => 'User Passwd',
-			'userSalt' => 'User Salt',
+			'memberId' => 'member',
+			'memberName' => 'Member Name',
+			'memberMail' => 'Member Mail',
+			'memberPhone' => 'Member Phone',
+			'memberPasswd' => 'Member Passwd',
+			'memberSalt' => 'Member Salt',
 			'activeKey' => 'Active Key',
 			'lastVisitDate' => 'Last Visit Date',
 			'signupDate' => 'Signup Date',
 			'state' => 'State',
 			*/
-			'userId' => 'User',
-			'userName' => 'User Name',
-			'userMail' => 'User Mail',
-			'userPasswd' => 'User Passwd',
-			'userSalt' => 'User Salt',
+			'memberId' => 'Member',
+			'memberName' => 'Member Name',
+			'memberMail' => 'Member Mail',
+			'memberPasswd' => 'Member Passwd',
+			'memberSalt' => 'Member Salt',
 			'activeKey' => 'Active Key',
 			'signupDate' => 'Signup Date',
 		);
@@ -143,13 +143,13 @@ class User extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('userId',$this->userId,true);
-		$criteria->compare('userName',$this->userName,true);
-		$criteria->compare('userMail',$this->userMail,true);
-		$criteria->compare('userPhone',$this->userPhone,true);
-		$criteria->compare('userPasswd',$this->userPasswd,true);
-		$criteria->compare('userSalt',$this->userSalt,true);
-		$criteria->compare('userAgree',$this->userAgree,true);
+		$criteria->compare('memberId',$this->memberId,true);
+		$criteria->compare('memberName',$this->memberName,true);
+		$criteria->compare('memberMail',$this->memberMail,true);
+		$criteria->compare('memberPhone',$this->memberPhone,true);
+		$criteria->compare('memberPasswd',$this->memberPasswd,true);
+		$criteria->compare('memberSalt',$this->memberSalt,true);
+		$criteria->compare('memberAgree',$this->memberAgree,true);
 		$criteria->compare('activeKey',$this->activeKey,true);
 		$criteria->compare('lastVisitDate',$this->lastVisitDate,true);
 		$criteria->compare('signupDate',$this->signupDate,true);
@@ -163,9 +163,9 @@ class User extends CActiveRecord
 	public function beforeSave() 
 	{
 		if ($this->isNewRecord) {
-			$this->passwdNotCrypt = $this->userPasswd;
-			$this->userSalt = time() . $this->captchaCode;
-			$this->userPasswd = md5($this->userSalt . $this->userPasswd);
+			$this->passwdNotCrypt = $this->memberPasswd;
+			$this->memberSalt = time() . $this->captchaCode;
+			$this->memberPasswd = md5($this->memberSalt . $this->memberPasswd);
 			$this->signupDate = date('Y-m-d H:i:s');
 			$this->activeKey = RandomString(32, '');
 			$this->state = 0;
@@ -174,16 +174,16 @@ class User extends CActiveRecord
 		return parent::beforeSave();
 	}
 	
-	public function getUserSalt() {
-		$userSalts = Yii::app()->db->createCommand()
-			    ->select('userSalt')
-			    ->from('User')
-			    ->where('userName=:userName', array(':userName'=>$this->userName))
+	public function getMemberSalt() {
+		$memberSalts = Yii::app()->db->createCommand()
+			    ->select('memberSalt')
+			    ->from('Member')
+			    ->where('memberName=:memberName', array(':memberName'=>$this->memberName))
 			    ->queryRow();
-		return $userSalt = $userSalts['userSalt'];
+		return $memberSalt = $memberSalts['memberSalt'];
 	}
 	
-	public function sendUserActiveMail() {
+	public function sendMemberActiveMail() {
 		/*
 		$mail = new YiiMailer();
 		$mail->setView('SignUp');
@@ -248,27 +248,27 @@ class User extends CActiveRecord
         //echo $this->activeKey;
         $params = array(
         	'MailFrom'=>'YondShion.com',
-        	'userName'=>$this->userName,
-        	'userMail'=>$this->userMail,
-        	'userPasswd'=>$this->passwdNotCrypt,
+        	'memberName'=>$this->memberName,
+        	'memberMail'=>$this->memberMail,
+        	'memberPasswd'=>$this->passwdNotCrypt,
         	'activeKey'=>$this->activeKey
         );
         $message->subject = 'Thank you for your registration';
         $message->setBody($params, 'text/html');
-        $message->addTo($this->userMail);
+        $message->addTo($this->memberMail);
         $message->from = 'hhyfly99@163.com';
         Yii::app()->mail->send($message);
         
 	}
 	
 	
-	public function activeUserState($userName, $activeKey) {
-		$user = Yii::app()->db->createCommand()
-			    ->update('user', 
+	public function activeMemberState($memberName, $activeKey) {
+		$member = Yii::app()->db->createCommand()
+			    ->update('member', 
 			    	array('state'=>1),
-			    	'userName=:userName AND activeKey=:activeKey',
-			    	array(':userName'=>$userName,':activeKey'=>$activeKey));
-		return $userSalt = $userSalts['userSalt'];
+			    	'memberName=:memberName AND activeKey=:activeKey',
+			    	array(':memberName'=>$memberName,':activeKey'=>$activeKey));
+		return $memberSalt = $memberSalts['memberSalt'];
 	}
 	
 }

@@ -3,12 +3,12 @@
 /**
  * SignInForm class.
  * SignInForm is the data structure for keeping
- * user SignIn form data. It is used by the 'SignIn' action of 'SiteController'.
+ * member SignIn form data. It is used by the 'SignIn' action of 'SiteController'.
  */
 class SignInForm extends CFormModel
 {
-	public $userName;
-	public $userPasswd;
+	public $memberName;
+	public $memberPasswd;
 	public $captchaCode;
 	public $rememberMe;
 
@@ -16,20 +16,20 @@ class SignInForm extends CFormModel
 
 	/**
 	 * Declares the validation rules.
-	 * The rules state that userName and userPasswd are required,
-	 * and userPasswd needs to be authenticated.
+	 * The rules state that memberName and memberPasswd are required,
+	 * and memberPasswd needs to be authenticated.
 	 */
 	public function rules()
 	{
 		return array(
-			// userName, userPasswd, captchaCode are required
-			array('userName, userPasswd, captchaCode', 'required'),
+			// memberName, memberPasswd, captchaCode are required
+			array('memberName, memberPasswd, captchaCode', 'required'),
 			// captchaCode needs to be entered correctly
 			array('captchaCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean'),
-			// userPasswd needs to be authenticated
-			array('userPasswd', 'authenticate'),
+			// memberPasswd needs to be authenticated
+			array('memberPasswd', 'authenticate'),
 		);
 	}
 
@@ -44,34 +44,34 @@ class SignInForm extends CFormModel
 	}
 
 	/**
-	 * Authenticates the userPasswd.
+	 * Authenticates the memberPasswd.
 	 * This is the 'authenticate' validator as declared in rules().
 	 */
 	public function authenticate($attribute,$params)
 	{
 		if(!$this->hasErrors())
 		{
-			$this->_identity=new UserIdentity($this->userName,$this->userPasswd);
+			$this->_identity=new MemberIdentity($this->memberName,$this->memberPasswd);
 			if(!$this->_identity->authenticate())
-				$this->addError('userPasswd','Incorrect userName or userPasswd.');
+				$this->addError('memberPasswd','Incorrect memberName or memberPasswd.');
 		}
 	}
 
 	/**
-	 * Logs in the user using the given userName and userPasswd in the model.
+	 * Logs in the member using the given memberName and memberPasswd in the model.
 	 * @return boolean whether SignIn is successful
 	 */
 	public function SignIn()
 	{
 		if($this->_identity===null)
 		{
-			$this->_identity=new UserIdentity($this->userName,$this->userPasswd);
+			$this->_identity=new MemberIdentity($this->memberName,$this->memberPasswd);
 			$this->_identity->authenticate();
 		}
-		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
+		if($this->_identity->errorCode===MemberIdentity::ERROR_NONE)
 		{
 			$duration=$this->rememberMe ? 3600*24*7 : 0; // 7 days
-			Yii::app()->user->SignIn($this->_identity,$duration);
+			Yii::app()->member->SignIn($this->_identity,$duration);
 			return true;
 		}
 		else

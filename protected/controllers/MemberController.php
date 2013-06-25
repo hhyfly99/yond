@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends Controller {
+class MemberController extends Controller {
 	
 	/**
 	 * Declares class-based actions.
@@ -43,7 +43,7 @@ class UserController extends Controller {
 	
 	/**
 	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
+	 * when an action is not explicitly requested by members.
 	 */
 	public function actionIndex()
 	{
@@ -54,7 +54,7 @@ class UserController extends Controller {
 	
 	public function actionSignUp() {
 		
-		$model = new User;
+		$model = new Member();
 		
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='SignUp-form')
@@ -63,16 +63,16 @@ class UserController extends Controller {
 			Yii::app()->end();
 		}
 
-		// collect user input data
-		if(isset($_POST['User']))
+		// collect member input data
+		if(isset($_POST['Member']))
 		{
-			$model->attributes=$_POST['User'];
-			// validate user input and redirect to the previous page if valid
+			$model->attributes=$_POST['Member'];
+			// validate member input and redirect to the previous page if valid
 			if($model->validate()) {
-				//$model->sendUserActiveMail();
+				//$model->sendMemberActiveMail();
 				$model->save();
-				$model->sendUserActiveMail();
-				$this->redirect(Yii::app()->user->returnUrl);
+				$model->sendMemberActiveMail();
+				$this->redirect(Yii::app()->member->returnUrl);
 			}
 		}
 		// display the SignUp form
@@ -80,11 +80,11 @@ class UserController extends Controller {
 		
 	}
 	
-	public function actionActiveUser() {
-		$userName = Yii::app()->request->getQuery('userName');
+	public function actionActiveMember() {
+		$memberName = Yii::app()->request->getQuery('memberName');
 		$activeKey = Yii::app()->request->getQuery('activeKey');
-		$model = new User();
-		$model->activeUserState($userName, $activeKey);
+		$model = new Member();
+		$model->activeMemberState($memberName, $activeKey);
 		$this->redirect(array('/site/page', 'view'=>'SignUpSuccess'));
 	}
 }
