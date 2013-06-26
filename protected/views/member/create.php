@@ -1,18 +1,18 @@
 <?php
-/* @var $this UserController */
-/* @var $model User */
+/* @var $this MemberController */
+/* @var $model Member */
 
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
+	'Members'=>array('index'),
 	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Manage User', 'url'=>array('admin')),
+	array('label'=>'List Member', 'url'=>array('index')),
+	array('label'=>'Manage Member', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create User</h1>
+<h1>Create Member</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

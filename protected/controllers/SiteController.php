@@ -96,7 +96,7 @@ class SiteController extends Controller
 			$model->attributes=$_POST['SignInForm'];
 			// validate member input and redirect to the previous page if valid
 			if($model->validate() && $model->SignIn())
-				$this->redirect(Yii::app()->member->returnUrl);
+				$this->redirect(Yii::app()->user->returnUrl);
 		}
 		// display the SignIn form
 		$this->render('SignIn',array('model'=>$model));
@@ -107,7 +107,7 @@ class SiteController extends Controller
 	 */
 	public function actionLogout()
 	{
-		Yii::app()->member->logout();
+		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
 	

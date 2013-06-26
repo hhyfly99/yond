@@ -42,6 +42,12 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+		
+		'member'=>array(
+			// enable cookie-based authentication
+			'allowAutoLogin'=>true,
+		),
+		
 		//yii-mail component
 		'mail' => array(
                 'class' => 'ext.yii-mail.YiiMail',

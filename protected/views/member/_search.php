@@ -1,6 +1,6 @@
 <?php
-/* @var $this UserController */
-/* @var $model User */
+/* @var $this MemberController */
+/* @var $model Member */
 /* @var $form CActiveForm */
 ?>
 
@@ -12,28 +12,38 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'userId'); ?>
-		<?php echo $form->textField($model,'userId',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->label($model,'memberId'); ?>
+		<?php echo $form->textField($model,'memberId',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'userName'); ?>
-		<?php echo $form->textField($model,'userName',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->label($model,'memberName'); ?>
+		<?php echo $form->textField($model,'memberName',array('size'=>20,'maxlength'=>20)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'userMail'); ?>
-		<?php echo $form->textField($model,'userMail',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->label($model,'memberMail'); ?>
+		<?php echo $form->textField($model,'memberMail',array('size'=>60,'maxlength'=>100)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'userPhone'); ?>
-		<?php echo $form->textField($model,'userPhone',array('size'=>16,'maxlength'=>16)); ?>
+		<?php echo $form->label($model,'memberPhone'); ?>
+		<?php echo $form->textField($model,'memberPhone',array('size'=>16,'maxlength'=>16)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'userPasswd'); ?>
-		<?php echo $form->textField($model,'userPasswd',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->label($model,'memberPasswd'); ?>
+		<?php echo $form->textField($model,'memberPasswd',array('size'=>60,'maxlength'=>128)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'memberSalt'); ?>
+		<?php echo $form->textField($model,'memberSalt',array('size'=>60,'maxlength'=>64)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'memberAgree'); ?>
+		<?php echo $form->textField($model,'memberAgree'); ?>
 	</div>
 
 	<div class="row">
@@ -54,6 +64,21 @@
 	<div class="row">
 		<?php echo $form->label($model,'state'); ?>
 		<?php echo $form->textField($model,'state'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'memberFrom'); ?>
+		<?php echo $form->textField($model,'memberFrom',array('size'=>60,'maxlength'=>60)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'memberGrade'); ?>
+		<?php echo $form->textField($model,'memberGrade'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'memberPoint'); ?>
+		<?php echo $form->textField($model,'memberPoint',array('size'=>20,'maxlength'=>20)); ?>
 	</div>
 
 	<div class="row buttons">

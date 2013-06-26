@@ -1,20 +1,13 @@
 <?php
-/* @var $this UserController */
-/* @var $dataProvider CActiveDataProvider */
+/* @var $this MemberController */
 
 $this->breadcrumbs=array(
-	'Users',
-);
-
-$this->menu=array(
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'Manage User', 'url'=>array('admin')),
+	'Member',
 );
 ?>
+<h1><?php echo $this->id . '/' . $this->action->id; ?></h1>
 
-<h1>Users</h1>
-
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+<p>
+	You may change the content of this page by modifying
+	the file <tt><?php echo __FILE__; ?></tt>.
+</p>

@@ -15,6 +15,9 @@
  * @property string $lastVisitDate
  * @property string $signupDate
  * @property integer $state
+ * @property string $memberFrom
+ * @property integer $memberGrade
+ * @property string $memberPoint
  */
 class Member extends CActiveRecord
 {
@@ -46,50 +49,59 @@ class Member extends CActiveRecord
 	public function rules()
 	{
 		// NOTE: you should only define rules for those attributes that
-		// will receive member inputs.
+		// will receive user inputs.
 		return array(
 			/*
-			array('state', 'numerical', 'integerOnly'=>true),
-			array('memberName', 'length', 'max'=>20),
+			array('memberAgree, state, memberGrade', 'numerical', 'integerOnly'=>true),
+			array('memberName, memberPoint', 'length', 'max'=>20),
 			array('memberMail', 'length', 'max'=>100),
 			array('memberPhone', 'length', 'max'=>16),
 			array('memberPasswd, activeKey', 'length', 'max'=>128),
+			array('memberSalt', 'length', 'max'=>64),
+			array('memberFrom', 'length', 'max'=>60),
 			array('lastVisitDate, signupDate', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('memberId, memberName, memberMail, memberPhone, memberPasswd, activeKey, lastVisitDate, signupDate, state', 'safe', 'on'=>'search'),
+			array('memberId, memberName, memberMail, memberPhone, memberPasswd, memberSalt, memberAgree, activeKey, lastVisitDate, signupDate, state, memberFrom, memberGrade, memberPoint', 'safe', 'on'=>'search'),
 			*/
 		
 			// memberName, memberMail, memberPasswd, memberPasswdConfirm, captchaCode are required
 			array('memberName, memberMail, memberPasswd, memberPasswdConfirm, captchaCode', 'required'),
-			
+
+
 			// memberName has to be a length valid 
 			array('memberName', 'length', 'min'=>6, 'max'=>16),
 			// memberName regex
 			array('memberName', 'match', 'pattern' => '/^[a-zA-Z0-9_]{6,16}$/u'),
 			// memberName unique 
 			array('memberName', 'unique', 'attributeName'=> 'memberName', 'className' => 'Member',  'message' => 'Member Name exist'),
-			
+
+
 			// memberMail unique 
 			array('memberMail', 'unique', 'attributeName'=> 'memberMail', 'className' => 'Member',  'message' => 'Member Email exist'),
 			// memberMail has to be a length valid 
 			array('memberMail', 'length', 'min'=>5, 'max'=>60),
 			// memberMail has to be a valid email address
 			array('memberMail', 'email'),
-			
+
+
 			// memberPasswd has to be a length valid 
 			array('memberPasswd', 'length', 'min'=>6, 'max'=>16),
 			// memberPasswd regex
 			array('memberPasswd', 'match', 'pattern' => '/^(?=.*\d)(?=.*[a-zA-Z]).{6,16}$/'),
-			
+
+
 			// memberPasswdConfirm has to be the same as memberPasswd
 			array('memberPasswdConfirm', 'compare', 'compareAttribute'=>'memberPasswd'),
-			
+
+
 			// captchaCode needs to be entered correctly
 			array('captchaCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
-			
+
+
 			// memberAgree needs to value = 1 
 			array( 'memberAgree', 'required', 'requiredValue'=>1, 'message'=>'You must agree with terms'),
+		
 		);
 	}
 
@@ -111,17 +123,22 @@ class Member extends CActiveRecord
 	{
 		return array(
 			/*
-			'memberId' => 'member',
+			'memberId' => 'Member',
 			'memberName' => 'Member Name',
 			'memberMail' => 'Member Mail',
 			'memberPhone' => 'Member Phone',
 			'memberPasswd' => 'Member Passwd',
 			'memberSalt' => 'Member Salt',
+			'memberAgree' => 'Member Agree',
 			'activeKey' => 'Active Key',
 			'lastVisitDate' => 'Last Visit Date',
 			'signupDate' => 'Signup Date',
 			'state' => 'State',
+			'memberFrom' => 'Member From',
+			'memberGrade' => 'Member Grade',
+			'memberPoint' => 'Member Point',
 			*/
+		
 			'memberId' => 'Member',
 			'memberName' => 'Member Name',
 			'memberMail' => 'Member Mail',
@@ -129,6 +146,7 @@ class Member extends CActiveRecord
 			'memberSalt' => 'Member Salt',
 			'activeKey' => 'Active Key',
 			'signupDate' => 'Signup Date',
+		
 		);
 	}
 
@@ -142,7 +160,23 @@ class Member extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+		/*
+		$criteria->compare('memberId',$this->memberId,true);
+		$criteria->compare('memberName',$this->memberName,true);
+		$criteria->compare('memberMail',$this->memberMail,true);
+		$criteria->compare('memberPhone',$this->memberPhone,true);
+		$criteria->compare('memberPasswd',$this->memberPasswd,true);
+		$criteria->compare('memberSalt',$this->memberSalt,true);
+		$criteria->compare('memberAgree',$this->memberAgree);
+		$criteria->compare('activeKey',$this->activeKey,true);
+		$criteria->compare('lastVisitDate',$this->lastVisitDate,true);
+		$criteria->compare('signupDate',$this->signupDate,true);
+		$criteria->compare('state',$this->state);
+		$criteria->compare('memberFrom',$this->memberFrom,true);
+		$criteria->compare('memberGrade',$this->memberGrade);
+		$criteria->compare('memberPoint',$this->memberPoint,true);
+		*/
+		
 		$criteria->compare('memberId',$this->memberId,true);
 		$criteria->compare('memberName',$this->memberName,true);
 		$criteria->compare('memberMail',$this->memberMail,true);
@@ -154,7 +188,8 @@ class Member extends CActiveRecord
 		$criteria->compare('lastVisitDate',$this->lastVisitDate,true);
 		$criteria->compare('signupDate',$this->signupDate,true);
 		$criteria->compare('state',$this->state);
-
+		
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -170,7 +205,8 @@ class Member extends CActiveRecord
 			$this->activeKey = RandomString(32, '');
 			$this->state = 0;
 		}
-		
+
+
 		return parent::beforeSave();
 	}
 	
@@ -211,8 +247,7 @@ class Member extends CActiveRecord
 			echo 'Error while sending email: '.$mail->ErrorInfo;
 		}
 		*/
-		
-		
+
 		/*
 		//Do some cron processing...
 		$cronResult="Cron job finished successfuly";
@@ -241,7 +276,8 @@ class Member extends CActiveRecord
 		}
 		echo PHP_EOL;
 		*/
-		
+
+
 		$message = new YiiMailMessage();
         //this points to the file test.php inside the view path
         $message->view = "SignUpMailTemplate";
@@ -260,8 +296,7 @@ class Member extends CActiveRecord
         Yii::app()->mail->send($message);
         
 	}
-	
-	
+
 	public function activeMemberState($memberName, $activeKey) {
 		$member = Yii::app()->db->createCommand()
 			    ->update('member', 

@@ -1,13 +1,13 @@
 <?php
-/* @var $this UserController */
-/* @var $model User */
+/* @var $this MemberController */
+/* @var $model Member */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'user-form',
+	'id'=>'member-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -16,27 +16,39 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'userName'); ?>
-		<?php echo $form->textField($model,'userName',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($model,'userName'); ?>
+		<?php echo $form->labelEx($model,'memberName'); ?>
+		<?php echo $form->textField($model,'memberName',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->error($model,'memberName'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'userMail'); ?>
-		<?php echo $form->textField($model,'userMail',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'userMail'); ?>
+		<?php echo $form->labelEx($model,'memberMail'); ?>
+		<?php echo $form->textField($model,'memberMail',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->error($model,'memberMail'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'userPhone'); ?>
-		<?php echo $form->textField($model,'userPhone',array('size'=>16,'maxlength'=>16)); ?>
-		<?php echo $form->error($model,'userPhone'); ?>
+		<?php echo $form->labelEx($model,'memberPhone'); ?>
+		<?php echo $form->textField($model,'memberPhone',array('size'=>16,'maxlength'=>16)); ?>
+		<?php echo $form->error($model,'memberPhone'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'userPasswd'); ?>
-		<?php echo $form->textField($model,'userPasswd',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'userPasswd'); ?>
+		<?php echo $form->labelEx($model,'memberPasswd'); ?>
+		<?php echo $form->textField($model,'memberPasswd',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->error($model,'memberPasswd'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'memberSalt'); ?>
+		<?php echo $form->textField($model,'memberSalt',array('size'=>60,'maxlength'=>64)); ?>
+		<?php echo $form->error($model,'memberSalt'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'memberAgree'); ?>
+		<?php echo $form->textField($model,'memberAgree'); ?>
+		<?php echo $form->error($model,'memberAgree'); ?>
 	</div>
 
 	<div class="row">
@@ -61,6 +73,24 @@
 		<?php echo $form->labelEx($model,'state'); ?>
 		<?php echo $form->textField($model,'state'); ?>
 		<?php echo $form->error($model,'state'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'memberFrom'); ?>
+		<?php echo $form->textField($model,'memberFrom',array('size'=>60,'maxlength'=>60)); ?>
+		<?php echo $form->error($model,'memberFrom'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'memberGrade'); ?>
+		<?php echo $form->textField($model,'memberGrade'); ?>
+		<?php echo $form->error($model,'memberGrade'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'memberPoint'); ?>
+		<?php echo $form->textField($model,'memberPoint',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->error($model,'memberPoint'); ?>
 	</div>
 
 	<div class="row buttons">

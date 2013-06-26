@@ -1,7 +1,7 @@
 <?php
 
-class MemberController extends Controller {
-	
+class MemberController extends Controller
+{
 	/**
 	 * Declares class-based actions.
 	 */
@@ -28,7 +28,6 @@ class MemberController extends Controller {
 	/**
 	 * This is the action to handle external exceptions.
 	 */
-	
 	public function actionError()
 	{
 		if($error=Yii::app()->errorHandler->error)
@@ -40,22 +39,20 @@ class MemberController extends Controller {
 		}
 	}
 	
-	
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by members.
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('index');
 	}
 	
-	public function actionSignUp() {
-		
+	
+	public function actionSignUp() 
+	{
 		$model = new Member();
-		
+
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='SignUp-form')
 		{
@@ -72,19 +69,48 @@ class MemberController extends Controller {
 				//$model->sendMemberActiveMail();
 				$model->save();
 				$model->sendMemberActiveMail();
-				$this->redirect(Yii::app()->member->returnUrl);
+				$this->redirect(Yii::app()->user->returnUrl);
 			}
 		}
 		// display the SignUp form
 		$this->render('SignUp',array('model'=>$model));
-		
+
 	}
 	
-	public function actionActiveMember() {
+	public function actionActiveMember() 
+	{
 		$memberName = Yii::app()->request->getQuery('memberName');
 		$activeKey = Yii::app()->request->getQuery('activeKey');
 		$model = new Member();
 		$model->activeMemberState($memberName, $activeKey);
 		$this->redirect(array('/site/page', 'view'=>'SignUpSuccess'));
 	}
+	
+
+	// Uncomment the following methods and override them if needed
+	/*
+	public function filters()
+	{
+		// return the filter configuration for this controller, e.g.:
+		return array(
+			'inlineFilterName',
+			array(
+				'class'=>'path.to.FilterClass',
+				'propertyName'=>'propertyValue',
+			),
+		);
+	}
+
+	public function actions()
+	{
+		// return external action classes, e.g.:
+		return array(
+			'action1'=>'path.to.ActionClass',
+			'action2'=>array(
+				'class'=>'path.to.AnotherActionClass',
+				'propertyName'=>'propertyValue',
+			),
+		);
+	}
+	*/
 }

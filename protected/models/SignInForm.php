@@ -71,7 +71,7 @@ class SignInForm extends CFormModel
 		if($this->_identity->errorCode===MemberIdentity::ERROR_NONE)
 		{
 			$duration=$this->rememberMe ? 3600*24*7 : 0; // 7 days
-			Yii::app()->member->SignIn($this->_identity,$duration);
+			Yii::app()->user->SignIn($this->_identity,$duration);
 			return true;
 		}
 		else

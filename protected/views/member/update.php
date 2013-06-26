@@ -1,21 +1,21 @@
 <?php
-/* @var $this UserController */
-/* @var $model User */
+/* @var $this MemberController */
+/* @var $model Member */
 
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
-	$model->userId=>array('view','id'=>$model->userId),
+	'Members'=>array('index'),
+	$model->memberId=>array('view','id'=>$model->memberId),
 	'Update',
 );
 
 $this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'View User', 'url'=>array('view', 'id'=>$model->userId)),
-	array('label'=>'Manage User', 'url'=>array('admin')),
+	array('label'=>'List Member', 'url'=>array('index')),
+	array('label'=>'Create Member', 'url'=>array('create')),
+	array('label'=>'View Member', 'url'=>array('view', 'id'=>$model->memberId)),
+	array('label'=>'Manage Member', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update User <?php echo $model->userId; ?></h1>
+<h1>Update Member <?php echo $model->memberId; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
