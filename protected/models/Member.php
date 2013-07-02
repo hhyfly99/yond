@@ -68,14 +68,12 @@ class Member extends CActiveRecord
 			// memberName, memberMail, memberPasswd, memberPasswdConfirm, captchaCode are required
 			array('memberName, memberMail, memberPasswd, memberPasswdConfirm, captchaCode', 'required'),
 
-
 			// memberName has to be a length valid 
 			array('memberName', 'length', 'min'=>6, 'max'=>16),
 			// memberName regex
 			array('memberName', 'match', 'pattern' => '/^[a-zA-Z0-9_]{6,16}$/u'),
 			// memberName unique 
 			array('memberName', 'unique', 'attributeName'=> 'memberName', 'className' => 'Member',  'message' => 'Member Name exist'),
-
 
 			// memberMail unique 
 			array('memberMail', 'unique', 'attributeName'=> 'memberMail', 'className' => 'Member',  'message' => 'Member Email exist'),
@@ -84,16 +82,13 @@ class Member extends CActiveRecord
 			// memberMail has to be a valid email address
 			array('memberMail', 'email'),
 
-
 			// memberPasswd has to be a length valid 
 			array('memberPasswd', 'length', 'min'=>6, 'max'=>16),
 			// memberPasswd regex
 			array('memberPasswd', 'match', 'pattern' => '/^(?=.*\d)(?=.*[a-zA-Z]).{6,16}$/'),
 
-
 			// memberPasswdConfirm has to be the same as memberPasswd
 			array('memberPasswdConfirm', 'compare', 'compareAttribute'=>'memberPasswd'),
-
 
 			// captchaCode needs to be entered correctly
 			array('captchaCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
