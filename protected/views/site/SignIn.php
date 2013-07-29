@@ -49,6 +49,7 @@ $this->breadcrumbs=array(
 		<div class="hint">Please enter the letters as they are shown in the image above.
 		<br/>Letters are not case-sensitive.</div>
 		<?php echo $form->error($model,'captchaCode'); ?>
+		<h3></h3>
 	</div>
 	<?php endif; ?>
 
@@ -59,7 +60,13 @@ $this->breadcrumbs=array(
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('SignIn'); ?>
+		<?php echo CHtml::submitButton(Yii::t('mainTemplate','SignIn')); ?>
+	</div>
+	
+	<div class="signUpLink">
+		<?php echo Yii::t('mainTemplate','You haven’t sign up yet')?>,
+		<?php echo Yii::t('mainTemplate','please click link here to ')?>
+		<?php echo CHtml::link(Yii::t('mainTemplate','SignUp'), array('member/signUp')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

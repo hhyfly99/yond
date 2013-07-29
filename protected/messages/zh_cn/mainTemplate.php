@@ -7,7 +7,8 @@
 		'SignIn'=>'登录',
 		'SignUp'=>'注册',
 		'Logout'=>'退出',
-		
+		'You haven’t sign up yet'=>'你还没有注册',
+		'please click link here to '=>'请点击这里',
 		
 		//
 	);

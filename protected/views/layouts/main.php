@@ -52,7 +52,7 @@
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contact', 'url'=>array('/site/contact')),
 				array('label'=>Yii::t('mainTemplate','SignIn'), 'url'=>array('/site/SignIn'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>Yii::t('mainTemplate','SignUp'), 'url'=>array('/member/SignUp')),
+				//array('label'=>Yii::t('mainTemplate','SignUp'), 'url'=>array('/member/SignUp')),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>

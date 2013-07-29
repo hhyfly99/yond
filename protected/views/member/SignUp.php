@@ -73,7 +73,7 @@ $this->breadcrumbs=array(
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('SignUp'); ?>
+		<?php echo CHtml::submitButton(Yii::t('mainTemplate','SignUp')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
